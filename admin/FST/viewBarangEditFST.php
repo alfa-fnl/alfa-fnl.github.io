@@ -9,35 +9,24 @@
 	$getDistr = $br->select("table_distributor");
 	$waktu    = date("Y-m-d");
 	if (isset($_POST['getSimpan'])) {
-		$kode_barang  = $br->validateHtml($_POST['kode_barang']);
-		$nama_barang  = $br->validateHtml($_POST['nama_barang']);
-		$merek_barang = $br->validateHtml($_POST['merek_barang']);
-		$distributor  = $br->validateHtml($_POST['distributor']);
-		$harga        = $br->validateHtml($_POST['harga']);
-		$stok         = $br->validateHtml($_POST['stok']);
-		$ket          = $_POST['ket'];
+			$ruang          = $br->validateHtml($_POST['ruang']);
+	$kode_barang    = $br->validateHtml($_POST['kode_barang']);
+	$nama_barang    = $br->validateHtml($_POST['nama_barang']);
+	$jumlah_barang  = $br->validateHtml($_POST['jumlah_barang']);
+	$tanggal_masuk  = $br->validateHtml($_POST['tanggal_masuk']);
+	$pemakai        = $br->validateHtml($_POST['pemakai']);
+	$kondisi        = $br->validateHtml($_POST['kondisi']);
+	$keterangan     = $_POST['keterangan'];
 
-		if ($kode_barang == " " || $nama_barang == " " || $merek_barang == " " || $distributor == " " || $harga == " " || $stok == " " || $ket == " " ) {
-			$response = ['response'=>'negative','alert'=>'lengkapi field'];
-		}else{
-			if ($harga < 0 || $stok < 0) {
-			 	$response = ['response'=>'negative','alert'=>'harga atau stok tidak boleh mines'];
-			}else{
-				if ($_FILES['foto']['name'] == "") {
-					$value = "kd_barang='$kode_barang',nama_barang='$nama_barang',kd_merek='$merek_barang',kd_distributor='$distributor',tanggal_masuk='$waktu',harga_barang='$harga',stok_barang='$stok',keterangan='$ket'";
-					$response = $br->update($table,$value,"kd_barang",$_GET['id'],"?page=viewBarangFST");
-				}else{
-					$response = $br->validateImage();
-					if ($response['types'] == "true") {
-						$value = "kd_barang='$kode_barang',nama_barang='$nama_barang',kd_merek='$merek_barang',kd_distributor='$distributor',tanggal_masuk='$waktu',harga_barang='$harga',stok_barang='$stok',keterangan='$ket',gambar='$response[image]'";
-						$response = $br->update($table,$value,"kd_barang",$_GET['id'],"?page=viewBarangFST");
-					}else{
-						$response = ['response'=>'negative','alert'=>'gambar error'];
-					}
-				}
-			} 
-		}
-	}
+	if ($ruang == " " || $kode_barang == " " || $nama_barang == " " || $jumlah_barang == " " || $tanggal_masuk == " " || $pemakai == " " || $kondisi == " " || $keterangan == " " ) {
+		$response = ['response'=>'negative','alert'=>'lengkapi field'];
+	}else  if ($response['types'] == "true") {
+		$value = "ruang='$ruang',kode_barang='$kode_barang',nama_barang='$nama_barang',jumlah_barang='$jumlah_barang',tanggal_masuk='$tanggal_masuk',pemakai='$pemakai',kondisi='$kondisi',keterangan='$keterangan'";
+		$response = $br->update($table,$value,"kode_barang",$_GET['id'],"?page=viewBarangFST");
+	}else{
+		$response = ['response'=>'negative','alert'=>'gambar error'];
+	}		
+}
  ?>
 <div class="main-content-2" style="margin: 35px 20px 20px 20px;">
     <div class="section__content section__content--p30">
