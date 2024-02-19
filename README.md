@@ -1,3 +1,3 @@
 # aplikasi-inventaris
 
-Ini hanyalah repository percobaan
+Ini hanyalah repository percobaan untuk belajar git fork
